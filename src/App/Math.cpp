@@ -1,4 +1,3 @@
-#include <math.h>
 #include "Math.hpp"
 
 float Math::length(sf::Vector2f a)

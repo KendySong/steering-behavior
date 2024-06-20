@@ -10,7 +10,8 @@ Application::Application()
     m_fps = 0;
     m_lastFPS = 0;
     m_deltaTime = 0;
-    p_window = new sf::RenderWindow(sf::VideoMode(WIDTH, HEIGHT), "Physics Engine");
+    p_config = Config::instance();
+    p_window = new sf::RenderWindow(sf::VideoMode(p_config->Width, p_config->Height), "Steering behavior");
     ImGui::SFML::Init(*p_window);
     m_sanbdox.init();
 }
@@ -46,7 +47,9 @@ int Application::run()
         m_clkDT.restart();
 
         ImGui::Begin("Info");
-        ImGui::Text("%i FPS", m_lastFPS);
+            ImGui::Text("%i FPS", m_lastFPS);
+            ImGui::SliderFloat("Max speed", &p_config->maxSpeed, 1, 150);
+            ImGui::Checkbox("Steer", &p_config->useSteer);
         ImGui::End();
 
         //Render

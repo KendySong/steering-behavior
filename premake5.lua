@@ -12,9 +12,8 @@ project "sandbox"
 
     defines "SFML_STATIC"
     files {
-        "src/App/**.cpp",
-        "src/App/**.hpp",
-        "src/Main.cpp",
+        "src/**.cpp",
+        "src/**.hpp",
         "libraries/include/ImGui/**.cpp",
         "libraries/include/ImGui/**.h"
     }

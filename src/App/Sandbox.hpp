@@ -15,4 +15,5 @@ public:
 private:
     std::vector<Agent> m_agents;
     sf::Vector2f m_mousePosition;
+    Config* p_config;
 };

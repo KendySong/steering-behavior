@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "../Config.hpp"
 
 struct Agent
 {
@@ -11,4 +12,7 @@ public :
 	sf::Vector2f position;
 	sf::Vector2f velocity;
 	sf::CircleShape body;
+
+private :
+	Config* p_config;
 };

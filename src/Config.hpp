@@ -1,9 +1,21 @@
 #pragma once
 #include <cstdint>
 
-const float RADIUS = 10;
-const float MAX_SPEED = 90;
-const int NB_AGENTS = 1;
+class Config
+{
+public :
+    static Config* instance();
 
-const std::uint32_t WIDTH = 1280;
-const std::uint32_t HEIGHT = 720;
+    float maxSpeed = 90;
+    bool useSteer = true;
+
+    const int NbAgents = 1;
+    const float Radius = 10;
+    
+    const std::uint32_t Width = 1280;
+    const std::uint32_t Height = 720;
+
+private :
+    Config();
+    static Config* p_config;
+};

@@ -6,6 +6,7 @@ class Application
 public :
 	Application(Application&) = delete;
 	static Application* instance();
+
 	int run();
 	sf::Vector2f getMousePos();
 	float getDeltaTime();
@@ -24,5 +25,6 @@ private :
 	
 	Sandbox m_sanbdox;
 	float m_deltaTime;
+	Config* p_config;
 };
 
