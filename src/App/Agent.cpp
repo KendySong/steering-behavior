@@ -11,20 +11,40 @@ Agent::Agent(sf::Vector2f position)
 	this->position = position;
 	this->velocity = sf::Vector2f();
 	body = sf::CircleShape(p_config->Radius);
-	body.setPosition(position);
+	ray = sf::VertexArray(sf::Lines, 2);
+	this->setVertices();
 }
 
 void Agent::move(sf::Vector2f dir)
 {
 	float deltaTime = Application::instance()->getDeltaTime();
-	dir = Math::normalize(dir) * p_config->maxSpeed;
 
 	this->velocity += dir * deltaTime;
+
 	this->position += this->velocity * deltaTime;
-	this->body.setPosition(this->position);
+	body.setPosition(this->position);
+	this->setVertices();
 }
 
-sf::Vector2f Agent::getPos()
+void Agent::seek(sf::Vector2f target)
 {
-	return body.getPosition() + p_config->Radius;
+	sf::Vector2f desired = Math::setLength(target - this->getCenter(), p_config->maxSpeed);
+	this->move(Math::limit(desired - this->velocity, p_config->maxForce));
+}
+
+void Agent::flee(sf::Vector2f target)
+{
+	sf::Vector2f desired = Math::setLength(target - this->getCenter(), p_config->maxSpeed);
+	this->move(-Math::limit(desired - this->velocity, p_config->maxForce));
+}
+
+sf::Vector2f Agent::getCenter()
+{
+	return this->position + p_config->Radius;
+}
+
+void Agent::setVertices()
+{
+	ray[0] = sf::Vertex(this->getCenter());
+	ray[1] = sf::Vertex(this->getCenter() + Math::setLength(this->velocity, 30));
 }

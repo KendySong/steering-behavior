@@ -6,7 +6,8 @@ class Config
 public :
     static Config* instance();
 
-    float maxSpeed = 90;
+    float maxSpeed = 800;
+    float maxForce = 400;
     bool useSteer = true;
 
     const int NbAgents = 1;

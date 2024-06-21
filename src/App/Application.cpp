@@ -48,7 +48,8 @@ int Application::run()
 
         ImGui::Begin("Info");
             ImGui::Text("%i FPS", m_lastFPS);
-            ImGui::SliderFloat("Max speed", &p_config->maxSpeed, 1, 150);
+            ImGui::SliderFloat("Max speed", &p_config->maxSpeed, 1, 300);
+            ImGui::SliderFloat("Max force", &p_config->maxForce, 1, 300);
             ImGui::Checkbox("Steer", &p_config->useSteer);
         ImGui::End();
 
