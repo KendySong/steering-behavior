@@ -11,7 +11,8 @@ Agent::Agent(sf::Vector2f position)
 	this->position = position;
 	this->velocity = sf::Vector2f();
 	body = sf::CircleShape(p_config->Radius);
-	ray = sf::VertexArray(sf::Lines, 2);
+	velRay	= sf::VertexArray(sf::Lines, 2);
+	seekRay = sf::VertexArray(sf::Lines, 2);
 	this->setVertices();
 }
 
@@ -20,8 +21,11 @@ void Agent::move(sf::Vector2f dir)
 	float deltaTime = Application::instance()->getDeltaTime();
 
 	this->velocity += dir * deltaTime;
+	this->velocity = Math::limit(this->velocity, p_config->maxSpeed);
 
 	this->position += this->velocity * deltaTime;
+
+	adjustPosition();
 	body.setPosition(this->position);
 	this->setVertices();
 }
@@ -29,13 +33,20 @@ void Agent::move(sf::Vector2f dir)
 void Agent::seek(sf::Vector2f target)
 {
 	sf::Vector2f desired = Math::setLength(target - this->getCenter(), p_config->maxSpeed);
-	this->move(Math::limit(desired - this->velocity, p_config->maxForce));
+	m_seek = Math::limit(desired - this->velocity, p_config->maxForce);
+	this->move(this->m_seek);
 }
 
 void Agent::flee(sf::Vector2f target)
 {
 	sf::Vector2f desired = Math::setLength(target - this->getCenter(), p_config->maxSpeed);
-	this->move(-Math::limit(desired - this->velocity, p_config->maxForce));
+	m_seek = Math::limit(desired - this->velocity, p_config->maxForce);
+	this->move(-m_seek);
+}
+
+void Agent::pursuit(Agent* target)
+{
+	this->seek(target->getCenter() + target->velocity);
 }
 
 sf::Vector2f Agent::getCenter()
@@ -45,6 +56,23 @@ sf::Vector2f Agent::getCenter()
 
 void Agent::setVertices()
 {
-	ray[0] = sf::Vertex(this->getCenter());
-	ray[1] = sf::Vertex(this->getCenter() + Math::setLength(this->velocity, 30));
+	sf::Vector2f center = this->getCenter();
+	velRay[0] = sf::Vertex(center, sf::Color::Red);
+	velRay[1] = sf::Vertex(center + Math::setLength(this->velocity, 30), sf::Color::Red);
+
+	seekRay[0] = sf::Vertex(center, sf::Color::Green);
+	seekRay[1] = sf::Vertex(center + Math::setLength(m_seek, 30), sf::Color::Green);
+}
+
+void Agent::draw(sf::RenderTarget& target)
+{
+	target.draw(body);
+	target.draw(velRay);
+	target.draw(seekRay);
+}
+
+void Agent::adjustPosition()
+{
+	position.x = position.x < 0 ? position.x = p_config->Width - 2 * p_config->Radius : position.x > p_config->Width - 2 * p_config->Radius ? 0 : position.x;
+	position.y = position.y < 0 ? position.x = p_config->Height - 2 * p_config->Radius : position.y > p_config->Height - 2 * p_config->Radius ? 2 * p_config->Radius : position.y;
 }

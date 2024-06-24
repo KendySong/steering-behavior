@@ -10,8 +10,3 @@ Config* Config::instance()
 	}
 	return p_config;
 }
-
-Config::Config()
-{
-
-}

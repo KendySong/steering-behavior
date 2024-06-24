@@ -6,8 +6,7 @@ workspace "steering-behavior"
     kind "ConsoleApp"
     language "C++"
     
-
-project "sandbox"  
+project "steering-behavior"  
     location "build"
 
     defines "SFML_STATIC"

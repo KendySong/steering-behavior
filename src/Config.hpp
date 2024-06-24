@@ -1,22 +1,27 @@
 #pragma once
 #include <cstdint>
+#include <SFML/Graphics.hpp>
+#include "App/Mode.hpp"
 
 class Config
 {
 public :
     static Config* instance();
 
-    float maxSpeed = 800;
-    float maxForce = 400;
-    bool useSteer = true;
+    int numberAgent       = 40;
+    float maxSpeed        = 800;
+    float maxForce        = 400;
+    Mode  mode            = Mode::Seek;
+    sf::Vector2f flowSize = sf::Vector2f(16, 9);
+    float flowForce       = 400;
+    bool  drawField       = true;
 
-    const int NbAgents = 1;
     const float Radius = 10;
     
-    const std::uint32_t Width = 1280;
+    const std::uint32_t Width  = 1280;
     const std::uint32_t Height = 720;
 
 private :
-    Config();
+    Config() = default;
     static Config* p_config;
 };

@@ -24,6 +24,8 @@ private :
 	std::uint32_t m_lastFPS;
 	
 	Sandbox m_sanbdox;
+	bool m_pause;
+	bool m_spaceDown;
 	float m_deltaTime;
 	Config* p_config;
 };
