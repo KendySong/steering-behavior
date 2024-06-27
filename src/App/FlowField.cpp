@@ -18,14 +18,18 @@ FlowField::FlowField()
 			vector[0] = sf::Vertex(sf::Vector2f(
 				caseCenter.x + x * m_case.x,
 				caseCenter.y + y * m_case.y
-			));
+			), sf::Color::Blue);
 
+			/*
 			float angle = Math::randomf(0, 2*M_PI);
 			sf::Vector2f randomVec(cos(angle), sin(angle));
-			vector[1] = sf::Vertex(sf::Vector2f(
-				vector[0].position.x,
-				vector[0].position.y
-			) + randomVec * 20.0f);
+			vector[1] = sf::Vertex(vector[0].position + randomVec * 20.0f);
+			*/
+
+			sf::Vector2f normalized = (vector[0].position / sf::Vector2f(p_config->Width, p_config->Height) * 2.0f) - 1;
+			float angle = atan2(y, x);
+			sf::Vector2f randomVec(normalized.y, -normalized.x);
+			vector[1] = sf::Vertex(vector[0].position + randomVec * 20.0f);
 
 			arrows.push_back(vector);
 			vectors.push_back(randomVec);

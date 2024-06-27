@@ -17,10 +17,7 @@ void Sandbox::init()
 	m_agents.reserve(p_config->numberAgent);
 	for (size_t i = 0; i < p_config->numberAgent; i++)
 	{
-		m_agents.emplace_back(Agent(sf::Vector2f(
-			Math::randomf(0, p_config->Width),
-			Math::randomf(0, p_config->Height)
-		)));
+		m_agents.emplace_back(Agent(Math::randomPosition({0, 0, p_config->Width, p_config->Height})));
 	}
 }
 
@@ -32,27 +29,43 @@ void Sandbox::update()
 	switch (p_config->mode)
 	{
 	case Mode::Seek:
+		for (size_t i = 0; i < m_agents.size(); i++)
+		{
+			m_agents[i].seek(m_mousePosition);
+		}
 		
-		m_agents[0].seek(m_mousePosition);
 		break;
 
 	case Mode::Flee:
-		m_agents[0].flee(m_mousePosition);
+		for (size_t i = 0; i < m_agents.size(); i++)
+		{
+			m_agents[i].flee(m_mousePosition);
+		}
 		break;
 
 	case Mode::Pursuit:
-		m_agents[0].pursuit(&m_target);
+		for (size_t i = 0; i < m_agents.size(); i++)
+		{
+			m_agents[i].pursuit(&m_target);
+		}
 		break;
 
 	case Mode::FlowField:
-		m_agents[0].move(m_flowField.getDirection(m_agents[0].position));
+		for (size_t i = 0; i < m_agents.size(); i++)
+		{
+			m_agents[i].move(m_flowField.getDirection(m_agents[i].position));
+		}		
 		break;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 	{
-		m_agents[0].position = sf::Vector2f(p_config->Width / 2, p_config->Height / 2);
-		m_agents[0].velocity = sf::Vector2f();
+		for (size_t i = 0; i < m_agents.size(); i++)
+		{
+			m_agents[i].position = sf::Vector2f(Math::randomPosition({ 0, 0, p_config->Width, p_config->Height }));
+			m_agents[i].velocity = sf::Vector2f();
+		}
+		
 	}
 }
 

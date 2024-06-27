@@ -25,6 +25,11 @@ sf::Vector2f Math::limit(sf::Vector2f a, float t)
     return a;
 }
 
+sf::Vector2f Math::randomPosition(sf::IntRect limit)
+{
+    return { Math::randomf(limit.left, limit.width),  Math::randomf(limit.top, limit.height) };
+}
+
 float Math::randomf(float min, float max)
 {
     return min + (float)rand() / (float)(RAND_MAX / (max - min));
@@ -55,6 +60,11 @@ sf::Vector2f operator+=(sf::Vector2f a, float b)
 sf::Vector2f operator+(sf::Vector2f a, float b)
 {
     return { a.x + b, a.y + b };
+}
+
+sf::Vector2f operator-(sf::Vector2f a, float b)
+{
+    return { a.x - b, a.y - b };
 }
 
 sf::Vector2f operator/(sf::Vector2f a, sf::Vector2f b)

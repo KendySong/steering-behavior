@@ -17,9 +17,10 @@ public :
     bool  drawField       = true;
 
     const float Radius = 10;
+    float simulationSpeed = 1;
     
-    const std::uint32_t Width  = 1280;
-    const std::uint32_t Height = 720;
+    const int Width  = 1280;
+    const int Height = 720;
 
 private :
     Config() = default;

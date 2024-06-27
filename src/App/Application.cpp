@@ -66,6 +66,7 @@ int Application::run()
 
         ImGui::Begin("Info");
             ImGui::Text("%i FPS", m_lastFPS);
+            ImGui::DragFloat("Simulation speed", &p_config->simulationSpeed, 0.5f, 0, 100);
             ImGui::SliderFloat("Max speed", &p_config->maxSpeed, 1, 3000);
             ImGui::SliderFloat("Max force", &p_config->maxForce, 1, 3000);
             
@@ -128,5 +129,5 @@ sf::Vector2f Application::getMousePos()
 
 float Application::getDeltaTime()
 {
-    return m_deltaTime;
+    return m_deltaTime * p_config->simulationSpeed;
 }
