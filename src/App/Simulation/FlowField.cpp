@@ -1,5 +1,5 @@
 #include "FlowField.hpp"
-#include "Math.hpp"
+#include "../Math.hpp"
 
 FlowField::FlowField()
 {

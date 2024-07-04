@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <SFML/Graphics.hpp>
-#include "App/Mode.hpp"
+#include "App/Simulation/Mode.hpp"
 
 class Config
 {

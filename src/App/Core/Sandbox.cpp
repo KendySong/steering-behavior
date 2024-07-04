@@ -2,9 +2,9 @@
 
 #include "Application.hpp"
 #include "Sandbox.hpp"
-#include "Math.hpp"
+#include "../Math.hpp"
 
-#include "../Config.hpp"
+#include "../../Config.hpp"
 
 void Sandbox::init()
 {

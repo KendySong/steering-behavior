@@ -2,8 +2,8 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 
-#include "Agent.hpp"
-#include "FlowField.hpp"
+#include "../Simulation/Agent.hpp"
+#include "../Simulation/FlowField.hpp"
 
 class Sandbox
 {

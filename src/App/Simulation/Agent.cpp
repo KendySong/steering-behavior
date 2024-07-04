@@ -1,8 +1,8 @@
 #include <iostream>
 
 #include "Agent.hpp"
-#include "Application.hpp"
-#include "Math.hpp"
+#include "../Core/Application.hpp"
+#include "../Math.hpp"
 
 Agent::Agent(sf::Vector2f position)
 {

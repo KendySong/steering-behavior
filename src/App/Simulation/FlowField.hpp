@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <SFML/Graphics.hpp>
-#include "../Config.hpp"
+#include "../../Config.hpp"
 
 class FlowField
 {

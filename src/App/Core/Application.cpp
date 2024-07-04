@@ -2,7 +2,7 @@
 #include <ImGui/imgui-SFML.h>
 
 #include "Application.hpp"
-#include "../Config.hpp"
+#include "../../Config.hpp"
 
 Application* Application::m_app = nullptr;
 Application::Application()
