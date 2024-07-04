@@ -1,2 +1,2 @@
-# physics-engine
-2D basic physics engine with SFML
+# Steering behavior
+Steering behavior simulation with SFML

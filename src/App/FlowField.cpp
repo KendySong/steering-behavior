@@ -23,6 +23,7 @@ FlowField::FlowField()
 
 			sf::Vector2f normalized = (vector[0].position / sf::Vector2f(p_config->Width, p_config->Height) * 2.0f) - 1;
 			sf::Vector2f randomVec(normalized.y, -normalized.x);
+			
 			vector[1] = sf::Vertex(vector[0].position + randomVec * vectorWorldSize);
 
 			arrows.push_back(vector);

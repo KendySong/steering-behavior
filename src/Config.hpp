@@ -15,7 +15,7 @@ public :
     sf::Vector2f flowSize = sf::Vector2f(16, 9);
     float flowForce       = 1500;
     bool  drawField       = true;
-    float neighborDist    = 50;
+    float neighborDist    = 450;
     bool  separate        = true;
     float separateForce   = 1;
 
