@@ -5,6 +5,11 @@ float Math::length(sf::Vector2f a)
     return sqrt(a.x*a.x + a.y*a.y);
 }
 
+float Math::distance(sf::Vector2f a, sf::Vector2f b)
+{
+    return Math::length(a-b);
+}
+
 sf::Vector2f Math::normalize(sf::Vector2f a)
 {
     return a / length(a);
@@ -23,6 +28,16 @@ sf::Vector2f Math::limit(sf::Vector2f a, float t)
         return Math::setLength(a, t);
     }
     return a;
+}
+
+float Math::dot(sf::Vector2f a, sf::Vector2f b)
+{
+    return a.x * b.x + a.y * b.y;
+}
+
+float Math::angle(sf::Vector2f a, sf::Vector2f b)
+{
+    return acosf(dot(a, b)/(Math::length(a) * Math::length(b)));
 }
 
 sf::Vector2f Math::randomPosition(sf::IntRect limit)
@@ -70,4 +85,9 @@ sf::Vector2f operator-(sf::Vector2f a, float b)
 sf::Vector2f operator/(sf::Vector2f a, sf::Vector2f b)
 {
     return { a.x / b.x, a.y / b.y };
+}
+
+sf::Vector2f operator/(sf::Vector2f a, float b)
+{
+    return { a.x / b, a.y / b };
 }

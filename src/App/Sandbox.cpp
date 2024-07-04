@@ -26,6 +26,35 @@ void Sandbox::update()
 	m_mousePosition = Application::instance()->getMousePos();	
 	this->moveTarget();
 
+	for (size_t i = 0; i < m_agents.size(); i++)
+	{
+		if (p_config->separate)
+		{
+			m_agents[i].separate(m_agents);
+		}
+
+		switch (p_config->mode)
+		{
+		case Mode::Seek:
+			m_agents[i].seek(m_mousePosition);
+			break;
+
+		case Mode::Flee:
+			m_agents[i].flee(m_mousePosition);			
+			break;
+
+		case Mode::Pursuit:
+			m_agents[i].pursuit(&m_target);			
+			break;
+
+		case Mode::FlowField:
+			m_agents[i].move(m_flowField.getDirection(m_agents[i].position));
+			break;
+		}
+		
+	}
+
+	/*
 	switch (p_config->mode)
 	{
 	case Mode::Seek:
@@ -57,6 +86,7 @@ void Sandbox::update()
 		}		
 		break;
 	}
+	*/
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 	{
@@ -64,8 +94,7 @@ void Sandbox::update()
 		{
 			m_agents[i].position = sf::Vector2f(Math::randomPosition({ 0, 0, p_config->Width, p_config->Height }));
 			m_agents[i].velocity = sf::Vector2f();
-		}
-		
+		}	
 	}
 }
 

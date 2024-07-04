@@ -7,9 +7,12 @@ class Math
 {
 public :
 	static float length(sf::Vector2f a);
+	static float distance(sf::Vector2f a, sf::Vector2f b);
 	static sf::Vector2f setLength(sf::Vector2f a, float t);
 	static sf::Vector2f normalize(sf::Vector2f a);
 	static sf::Vector2f limit(sf::Vector2f a, float t);
+	static float dot(sf::Vector2f a, sf::Vector2f b);
+	static float angle(sf::Vector2f a, sf::Vector2f b);
 	static sf::Vector2f randomPosition(sf::IntRect limit);
 	static float randomf(float min, float max);
 	static int random(int min, int max);
@@ -21,3 +24,4 @@ sf::Vector2f operator+=(sf::Vector2f a, float b);
 sf::Vector2f operator+(sf::Vector2f a, float b);
 sf::Vector2f operator-(sf::Vector2f a, float b);
 sf::Vector2f operator/(sf::Vector2f a, sf::Vector2f b);
+sf::Vector2f operator/(sf::Vector2f a, float b);

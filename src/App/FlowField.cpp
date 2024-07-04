@@ -7,6 +7,7 @@ FlowField::FlowField()
 	
 	m_case = sf::Vector2f(p_config->Width, p_config->Height) / p_config->flowSize;
 	sf::Vector2f caseCenter = m_case / 2.0f;
+	float vectorWorldSize = caseCenter.x / 2;
 
 	//Init the vector field
 	arrows.reserve(p_config->flowSize.x * p_config->flowSize.y);
@@ -20,16 +21,9 @@ FlowField::FlowField()
 				caseCenter.y + y * m_case.y
 			), sf::Color::Blue);
 
-			/*
-			float angle = Math::randomf(0, 2*M_PI);
-			sf::Vector2f randomVec(cos(angle), sin(angle));
-			vector[1] = sf::Vertex(vector[0].position + randomVec * 20.0f);
-			*/
-
 			sf::Vector2f normalized = (vector[0].position / sf::Vector2f(p_config->Width, p_config->Height) * 2.0f) - 1;
-			float angle = atan2(y, x);
 			sf::Vector2f randomVec(normalized.y, -normalized.x);
-			vector[1] = sf::Vertex(vector[0].position + randomVec * 20.0f);
+			vector[1] = sf::Vertex(vector[0].position + randomVec * vectorWorldSize);
 
 			arrows.push_back(vector);
 			vectors.push_back(randomVec);

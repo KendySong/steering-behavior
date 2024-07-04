@@ -49,6 +49,43 @@ void Agent::pursuit(Agent* target)
 	this->seek(target->getCenter() + target->velocity);
 }
 
+void Agent::separate(std::vector<Agent>& group)
+{
+	int count = 0;
+	sf::Vector2f separation(0, 0);
+	
+	for (size_t i = 0; i < group.size(); i++)
+	{
+		sf::Vector2f dir = this->getCenter() - group[i].getCenter();
+		float distance = Math::length(dir);
+
+		if (distance < p_config->neighborDist && this != &group[i])
+		{
+			count++;
+			separation += dir * 1.0f / distance;
+		}
+	}
+
+	if (count == 0)
+	{
+		return;
+	}
+
+	this->move(separation);
+}
+
+void Agent::cohere(std::vector<Agent>& group)
+{
+	for (size_t i = 0; i < group.size(); i++)
+	{
+		if (Math::distance(group[i].getCenter(), this->getCenter()) > p_config->neighborDist)
+		{
+			//Rapproch
+		}
+	}
+
+}
+
 sf::Vector2f Agent::getCenter()
 {
 	return this->position + p_config->Radius;

@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include <SFML/Graphics.hpp>
 #include "../Config.hpp"
 
@@ -11,6 +12,8 @@ public :
 	void seek(sf::Vector2f target);
 	void flee(sf::Vector2f target);
 	void pursuit(Agent* target);
+	void separate(std::vector<Agent>& group);
+	void cohere(std::vector<Agent>& group);
 	void setVertices();
 	void draw(sf::RenderTarget& target);
 	sf::Vector2f getCenter();

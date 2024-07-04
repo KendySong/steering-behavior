@@ -69,7 +69,7 @@ int Application::run()
             ImGui::DragFloat("Simulation speed", &p_config->simulationSpeed, 0.5f, 0, 100);
             ImGui::SliderFloat("Max speed", &p_config->maxSpeed, 1, 3000);
             ImGui::SliderFloat("Max force", &p_config->maxForce, 1, 3000);
-            
+            ImGui::DragFloat("Neighbor distance", &p_config->neighborDist, 1, 5, 500);
             if (ImGui::BeginCombo("Agent Mode", modeString(p_config->mode)))
             {
                 for (size_t i = 0; i < static_cast<int>(Mode::Count); i++)
@@ -88,18 +88,27 @@ int Application::run()
                 ImGui::EndCombo();
             }
 
+            ImGui::Checkbox("Separate", &p_config->separate);
+            ImGui::DragFloat("Separate Force", &p_config->separateForce, 0.1, 0.5, 10);
+
             if (p_config->mode == Mode::FlowField)
             {
-                ImGui::DragFloat("Flow force", &p_config->flowForce, 0.5f, 1, 500);
+                ImGui::SeparatorText("FlowField");
+                ImGui::DragFloat("Flow force", &p_config->flowForce, 15, 1000, 3000);
                 ImGui::Checkbox("Draw field", &p_config->drawField);
             }
 
-            ImGui::SetNextItemOpen(true, ImGuiCond_Always);
-            if (ImGui::TreeNode("Commands"))
-            {
-                ImGui::TextUnformatted("[R] : Reset agents position\n[Space] : Pause the simulation\n[ESC] : Quit the simulation");
-                ImGui::TreePop();
-            }           
+            ImGui::SeparatorText("Commands");
+            ImGui::TextUnformatted("[R] : Reset agents position\n[Space] : Pause the simulation\n[ESC] : Quit the simulation");
+
+            ImGui::SeparatorText("Colors");
+            ImGui::TextUnformatted("Seek");
+            ImGui::SameLine();
+            ImGui::ColorButton("Seek", { 0, 1, 0, 1 });
+            ImGui::TextUnformatted("Velocity");
+            ImGui::SameLine();
+            ImGui::ColorButton("Velocity", { 1, 0, 0, 1 });
+            
         ImGui::End();
 
         //Render
