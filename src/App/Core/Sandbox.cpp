@@ -28,11 +28,6 @@ void Sandbox::update()
 
 	for (size_t i = 0; i < m_agents.size(); i++)
 	{
-		if (p_config->separate)
-		{
-			m_agents[i].separate(m_agents);
-		}
-
 		switch (p_config->mode)
 		{
 		case Mode::Seek:
@@ -52,41 +47,21 @@ void Sandbox::update()
 			break;
 		}
 		
+		if (p_config->separate)
+		{
+			m_agents[i].separate(m_agents);
+		}
+
+		if (p_config->cohere)
+		{
+			m_agents[i].cohere(m_agents);
+		}
+
+		if (p_config->align)
+		{
+			m_agents[i].align(m_agents);
+		}
 	}
-
-	/*
-	switch (p_config->mode)
-	{
-	case Mode::Seek:
-		for (size_t i = 0; i < m_agents.size(); i++)
-		{
-			m_agents[i].seek(m_mousePosition);
-		}
-		
-		break;
-
-	case Mode::Flee:
-		for (size_t i = 0; i < m_agents.size(); i++)
-		{
-			m_agents[i].flee(m_mousePosition);
-		}
-		break;
-
-	case Mode::Pursuit:
-		for (size_t i = 0; i < m_agents.size(); i++)
-		{
-			m_agents[i].pursuit(&m_target);
-		}
-		break;
-
-	case Mode::FlowField:
-		for (size_t i = 0; i < m_agents.size(); i++)
-		{
-			m_agents[i].move(m_flowField.getDirection(m_agents[i].position));
-		}		
-		break;
-	}
-	*/
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 	{

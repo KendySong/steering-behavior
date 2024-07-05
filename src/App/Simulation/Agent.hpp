@@ -14,6 +14,7 @@ public :
 	void pursuit(Agent* target);
 	void separate(std::vector<Agent>& group);
 	void cohere(std::vector<Agent>& group);
+	void align(std::vector<Agent>& group);
 	void setVertices();
 	void draw(sf::RenderTarget& target);
 	sf::Vector2f getCenter();

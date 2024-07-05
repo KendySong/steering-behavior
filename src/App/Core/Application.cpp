@@ -89,12 +89,16 @@ int Application::run()
             }
 
             ImGui::Checkbox("Separate", &p_config->separate);
-            ImGui::DragFloat("Separate Force", &p_config->separateForce, 0.1, 0.5, 10);
+            ImGui::DragFloat("Separate Force", &p_config->separateForce, 0.1, 0.5, 100);
+            ImGui::Checkbox("Cohere", &p_config->cohere);
+            ImGui::DragFloat("Cohere Force", &p_config->cohereForce, 0.1, 0.5, 100);
+            ImGui::Checkbox("Align", &p_config->align);
+            ImGui::DragFloat("Align Force", &p_config->alignForce, 0.1, 0.5, 100);
 
             if (p_config->mode == Mode::FlowField)
             {
                 ImGui::SeparatorText("FlowField");
-                ImGui::DragFloat("Flow force", &p_config->flowForce, 15, 1000, 3000);
+                ImGui::DragFloat("Flow force", &p_config->flowForce, 15, 100, 3000);
                 ImGui::Checkbox("Draw field", &p_config->drawField);
             }
 

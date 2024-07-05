@@ -17,7 +17,11 @@ public :
     bool  drawField       = true;
     float neighborDist    = 450;
     bool  separate        = true;
-    float separateForce   = 1;
+    float separateForce   = 10;
+    bool  cohere          = true;
+    float cohereForce     = 10;
+    bool  align = true;
+    float alignForce = 10;
 
     const float Radius = 10;
     float simulationSpeed = 2;

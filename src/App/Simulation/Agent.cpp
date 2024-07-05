@@ -71,19 +71,52 @@ void Agent::separate(std::vector<Agent>& group)
 		return;
 	}
 
-	this->move(separation);
+	this->move(separation/count * p_config->separateForce);
 }
 
 void Agent::cohere(std::vector<Agent>& group)
 {
+	int count = 0;
+	sf::Vector2f cohere(0, 0);
 	for (size_t i = 0; i < group.size(); i++)
 	{
-		if (Math::distance(group[i].getCenter(), this->getCenter()) > p_config->neighborDist)
+		sf::Vector2f dir = group[i].getCenter() - this->getCenter();
+		float distance = Math::length(dir);
+		if (distance > p_config->neighborDist)
 		{
-			//Rapproch
+			count++;
+			cohere += dir * 1.0f / distance;
 		}
 	}
 
+	if (count == 0)
+	{
+		return;
+	}
+
+	this->move(cohere/count * p_config->cohereForce);
+}
+
+void Agent::align(std::vector<Agent>& group)
+{
+	int count = 0;
+	sf::Vector2f align(0, 0);
+	for (size_t i = 0; i < group.size(); i++)
+	{
+		float distance = Math::distance(this->getCenter(), group[i].getCenter());
+		if (distance > p_config->neighborDist)
+		{
+			count++;
+			align += group[i].velocity * 1.0f / distance;
+		}
+	}
+
+	if (count == 0)
+	{
+		return;
+	}
+
+	this->move(align/count * p_config->alignForce);
 }
 
 sf::Vector2f Agent::getCenter()
